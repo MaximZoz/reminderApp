@@ -1,2 +1,14 @@
-<p>main-layout works!</p>
-<router-outlet></router-outlet>
+<nav class="navbar bg-primary">
+  <h1>
+    <a routerLink="/"> reminderApp </a>
+  </h1>
+  <ul>
+    <li>
+      <a href="#" (click)="login($event)"> Войти </a>
+    </li>
+  </ul>
+</nav>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

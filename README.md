@@ -1,16 +1,15 @@
-# Создаём модуль пользовательской панели, применяем Lazy loading для него
+# Создаём структуру пользовательской панели (user-layout)
 
-src\app\app-routing.module.ts => Routes =>
+#### создаём структуру навбара main-layout.component
 
-- loadChildren
+- src\app\shared\components\main-layout\main-layout.component.html
 
-### Создаём layout пользователя (генерируем компоненты, которые будут относиться к layout), прописываем роуты для них
+#### создаём структуру навбара user-layout, делаем активные ссылки на класс active
 
-- ng g c user/shared/component/user-layout --skipTests
-- ng g c user/login-page --skipTests
-- ng g c user/reminder-page --skipTests
-- ng g c user/edit-page --skipTests
+- src\app\user\shared\component\user-layout\user-layout.component.html
 
-  src\app\user\user.module.ts => RouterModule.forChild => component => AdminLayoutComponent =>
+#### при нажатии на войти редиректим пользователя на страницу (user/login)
 
-- children
+src\app\user\shared\component\user-layout\user-layout.component.ts
+
+#### при нажатии на выйти редиректим юзера на страницу (/)
