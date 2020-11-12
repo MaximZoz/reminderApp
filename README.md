@@ -1,15 +1,26 @@
-# Создаём структуру пользовательской панели (user-layout)
+# создаём и оживляем страницу логина
 
-#### создаём структуру навбара main-layout.component
+### создаём шаблон для входа
 
-- src\app\shared\components\main-layout\main-layout.component.html
+user\login-page\login-page.component.html
 
-#### создаём структуру навбара user-layout, делаем активные ссылки на класс active
+### подключаем форму
 
-- src\app\user\shared\component\user-layout\user-layout.component.html
+user\login-page\login-page.component.ts => form user\login-page\user-page.component.ts => ngOnInit =>
 
-#### при нажатии на войти редиректим пользователя на страницу (user/login)
+- this.form = new FormGroup
 
-src\app\user\shared\component\user-layout\user-layout.component.ts
+app.module.ts => imports =>
 
-#### при нажатии на выйти редиректим юзера на страницу (/)
+- FormsModule
+- ReactiveFormsModule
+
+### создаём файл интерфейсов, реализуем его в login-page.component
+
+shared\interfaces.ts =>
+
+- User
+
+admin\login-page\login-page.component.ts =>
+
+- const user: User

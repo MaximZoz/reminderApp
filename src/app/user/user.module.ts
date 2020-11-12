@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { CreatePageComponent } from './create-page/create-page.component';
@@ -18,6 +19,8 @@ import { UserLayoutComponent } from './shared/component/user-layout/user-layout.
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild([
       {
         path: '',
