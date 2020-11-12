@@ -1,33 +1,20 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { HomePageComponent } from './home-page/home-page.component';
-import { ReminderPageComponent } from './reminder-page/reminder-page.component';
-import { MainLayoutComponent } from './shared/components/main-layout/main-layout.component';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '',
-    component: MainLayoutComponent,
-    children: [
-      {
-        path: '',
-        redirectTo: '/',
-        pathMatch: 'full',
-      },
-      {
-        path: '',
-        component: HomePageComponent,
-      },
-      {
-        path: 'reminder/:id',
-        component: ReminderPageComponent,
-      },
-    ],
+    path: 'user',
+
+    loadChildren: () => import('./user/user.module').then((m) => m.UserModule),
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      preloadingStrategy: PreloadAllModules,
+    }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

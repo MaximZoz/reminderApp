@@ -1,19 +1,16 @@
-# Инициализируем Angular проект reminderApp
+# Создаём модуль пользовательской панели, применяем Lazy loading для него
 
-# Создаём layout (генерируем компоненты, которые будут относиться к layout)
+src\app\app-routing.module.ts => Routes =>
 
-### генерируем компонент main-layout (показ напоминаний) в папке shared/components
+- loadChildren
 
-- ng g c shared/components/main-layout --skipTests
+### Создаём layout пользователя (генерируем компоненты, которые будут относиться к layout), прописываем роуты для них
 
-### генерируем компонент home-page (Домашняя страница) в корне проекта
+- ng g c user/shared/component/user-layout --skipTests
+- ng g c user/login-page --skipTests
+- ng g c user/reminder-page --skipTests
+- ng g c user/edit-page --skipTests
 
-- ng g c home-page --skipTests
+  src\app\user\user.module.ts => RouterModule.forChild => component => AdminLayoutComponent =>
 
-### генерируем компонент, reminder-page (страница напоминания) в корне проекта
-
-- ng g c reminder-page --skipTests
-
-#### применяем main-layout и его детей (home-page и reminder-page) к роутам
-
-- app-routing.module.ts => const routes => component => MainLayoutComponent
+- children
