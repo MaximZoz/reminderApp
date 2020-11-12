@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "reminderApp"
+    }
+  },
+  "defaultProject": "reminderApp",
+  "cli": {
+    "analytics": "e9e8be43-64ce-49bc-a475-3e62972899c4"
+  }
 }
