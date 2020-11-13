@@ -8,6 +8,7 @@ import { EditPageComponent } from './edit-page/edit-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { ReminderPageComponent } from './reminder-page/reminder-page.component';
 import { UserLayoutComponent } from './shared/component/user-layout/user-layout.component';
+import { AuthService } from './shared/services/auth.service';
 
 @NgModule({
   declarations: [
@@ -36,5 +37,6 @@ import { UserLayoutComponent } from './shared/component/user-layout/user-layout.
     ]),
   ],
   exports: [RouterModule],
+  providers: [AuthService],
 })
 export class UserModule {}
