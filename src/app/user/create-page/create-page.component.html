@@ -1,1 +1,46 @@
-<p>create-page works!</p>
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <h1>Создание нового напоминания</h1>
+
+  <div
+    class="form-control"
+    [ngClass]="{
+      invalid: form.get('title').touched && form.get('title').invalid
+    }"
+  >
+    <label for="title">Что напомнить:</label>
+    <input id="title" type="text" formControlName="title" />
+    <div
+      *ngIf="form.get('title').touched && form.get('title').invalid"
+      class="validation"
+    >
+      <small *ngIf="form.get('title').errors.required">
+        Введите название поста
+      </small>
+    </div>
+  </div>
+
+  <div
+    class="form-control"
+    [ngClass]="{
+      invalid: form.get('date').touched && form.get('date').invalid
+    }"
+  >
+    <label for="date">Когда напомнить:</label>
+
+    <input id="date" type="date" formControlName="date" />
+    <div
+      *ngIf="form.get('date').touched && form.get('date').invalid"
+      class="validation"
+    >
+      <small *ngIf="form.get('date').errors.required"> Введите дату </small>
+    </div>
+  </div>
+
+  <button
+    type="submit"
+    class="btn btn-block btn-dark"
+    [disabled]="form.invalid"
+  >
+    Создать напоминание
+  </button>
+</form>

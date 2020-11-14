@@ -1,13 +1,5 @@
-# Добавляем гварды для компонентов user
+# Форма создания напоминания
 
-### создаём сервис guard, в нём реализуем метод canActivate
+### создаём шаблон формы
 
-src\app\shared\services\auth.guard.ts => AuthGuard =>
-
-- canActivate
-
-### дабавляем метод canActivate в дочерние роуты user
-
-src\app\user\user.module.ts => imports =>
-
-- canActivate: (AuthGuard)
+- src\app\user\create-page\create-page.component.html

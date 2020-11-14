@@ -3,19 +3,17 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { User } from '../interfaces';
+import { Token } from '@angular/compiler/src/ml_parser/lexer';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AuthService {
   private url = `https://europe-west1-st-web-test.cloudfunctions.net/api/auth`;
-
-  private token: string;
-
   constructor(private http: HttpClient) {}
 
   login(user: User): Observable<any> {
     return this.http.post(this.url, user).pipe(
       tap((response) => {
-        this.token = response.token;
+        localStorage.setItem('token', response.token.toString());
       })
     );
   }
@@ -27,6 +25,10 @@ export class AuthService {
   //     }),
   //   });
   // }
+
+  get token(): string {
+    return localStorage.getItem('token');
+  }
 
   logout() {}
 

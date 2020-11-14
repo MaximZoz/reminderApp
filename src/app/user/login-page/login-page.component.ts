@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 export class LoginPageComponent implements OnInit {
   form: FormGroup;
   submitted = false;
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(public auth: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -33,6 +33,7 @@ export class LoginPageComponent implements OnInit {
       email: this.form.value.email,
       password: this.form.value.password,
     };
+
     this.auth.login(user).subscribe(
       () => {
         this.form.reset();

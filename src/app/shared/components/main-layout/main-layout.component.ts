@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, CanActivate } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-main-layout',
@@ -7,11 +8,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./main-layout.component.scss'],
 })
 export class MainLayoutComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private router: Router, public auth: AuthService) {}
 
   ngOnInit(): void {}
+
   login(event: Event) {
     event.preventDefault();
-    this.router.navigate(['user', 'login']);
+    if (this.auth.isAuthenticated) {
+      this.router.navigate(['user', 'reminder']);
+    } else {
+      this.router.navigate(['user', 'login']);
+    }
   }
 }
