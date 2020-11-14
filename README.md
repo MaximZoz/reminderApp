@@ -1,5 +1,13 @@
-# Авторизовываем пользователя
+# Подключаем DataBase для приложения
 
-### Создаём сервис для авторизации пользователя src\app\user\shared\services\auth.service.ts
+### валидируем форму и отправляем её на сервер
 
-- src\app\user\shared\services\auth.service.ts
+src\app\user\login-page\login-page.component.ts => submit =>
+
+- this.auth.login(user).subscribe
+
+### ответ с сервера в виде токена закидываем в private token
+
+src\app\user\shared\services\auth.service.ts => AuthService =>
+
+- private token
