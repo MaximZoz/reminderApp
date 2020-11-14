@@ -1,13 +1,13 @@
-# Подключаем DataBase для приложения
+# Добавляем гварды для компонентов user
 
-### валидируем форму и отправляем её на сервер
+### создаём сервис guard, в нём реализуем метод canActivate
 
-src\app\user\login-page\login-page.component.ts => submit =>
+src\app\shared\services\auth.guard.ts => AuthGuard =>
 
-- this.auth.login(user).subscribe
+- canActivate
 
-### ответ с сервера в виде токена закидываем в private token
+### дабавляем метод canActivate в дочерние роуты user
 
-src\app\user\shared\services\auth.service.ts => AuthService =>
+src\app\user\user.module.ts => imports =>
 
-- private token
+- canActivate: (AuthGuard)
