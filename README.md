@@ -1,23 +1,13 @@
-# Создание поста
+# Создание интерсептора для обработки ошибок
 
-### Создаём сервис для постов posts.service
+### если происходит ошибка авторизации (401) , то удаляем недействительный токен и направляем юзера в форму регистрации
 
-- PostsService
+- src\app\shared\auth.interseptor.ts
 
-- #### создаём метод create по типу observable <Post>
+#### регистрируем интерсепрот в app.module
 
-  src\app\shared\posts.service.ts => PostsService => create
+- src\app\app.module.ts
 
-### пишем логику, что при создании поста отправляем его на baseDate и очишщаем форму
+#### применяем его к login-page (выводим massage ошибки авторизации в шаблон формы логина)
 
-src\app\admin\create-page\create-page.component.ts => submit
-
-- this.postsService.create(post).subscribe()
-
-### обрабатываем логику id поста, который должен приходить с сервера
-
-src\app\shared\posts.service.ts => PostsService => create => pipe => map =>
-
-- ...post,
-  id: response
-  date: new Date(post.date)
+- src\app\user\login-page\login-page.component.html

@@ -2,6 +2,10 @@
   <!-- *ngIf="auth.isAuthenticated()" -->
   <h2>Зарегистрируйтесь в системе</h2>
 
+  <div class="alert alert-info" *ngIf="message">
+    {{ message }}
+  </div>
+
   <div
     class="form-control"
     [ngClass]="{
