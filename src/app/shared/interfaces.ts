@@ -8,6 +8,6 @@ export interface Token {
 }
 
 export interface Post {
-  title: string;
+  note: string;
   date: Date;
 }
