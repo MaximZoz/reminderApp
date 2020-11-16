@@ -1,1 +1,39 @@
-<p>reminder-page works!</p>
+<div *ngIf="posts.length; else loading">
+  <div class="form-control">
+    <input
+      type="text"
+      placeholder="Найти напоминание по названию..."
+      [(ngModel)]="searchStr"
+    />
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Название напоминания</th>
+        <th>Дата и время напоминания</th>
+        <th>Состояние</th>
+        <th>Действие</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let post of posts | searchPosts: searchStr">
+        <td>{{ post.note }}</td>
+        <td>{{ post.date | date: "medium":null:"ru" }}</td>
+        <td></td>
+        <td>
+          <button
+            class="btn btn-link open"
+            [routerLink]="['/user', 'reminder', post.id, 'edit']"
+          >
+            Изменить
+          </button>
+          <a (click)="remove(post.id)">Удалить</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #loading>
+  <p class="text-center">Идет загрузка...</p>
+</ng-template>

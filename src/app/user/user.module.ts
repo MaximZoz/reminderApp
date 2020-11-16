@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AuthGuard } from '../shared/services/auth.guard';
 import { AuthService } from '../shared/services/auth.service';
+import { SearchPipe } from '../shared/services/search.pipe';
 
 import { CreatePageComponent } from './create-page/create-page.component';
 import { EditPageComponent } from './edit-page/edit-page.component';
@@ -18,6 +19,7 @@ import { UserLayoutComponent } from './shared/component/user-layout/user-layout.
     ReminderPageComponent,
     CreatePageComponent,
     EditPageComponent,
+    SearchPipe,
   ],
   imports: [
     CommonModule,

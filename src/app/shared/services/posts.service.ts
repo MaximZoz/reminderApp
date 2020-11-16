@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthService } from './auth.service';
-import { Post } from '../interfaces';
+import { Post, Reminder } from '../interfaces';
 
 @Injectable({ providedIn: 'root' })
 export class PostsService {
@@ -18,13 +18,36 @@ export class PostsService {
         }),
       })
       .pipe(
-        map((response) => {
+        map(() => {
           return {
             ...post,
-            id: response,
-            date: new Date(post.date),
           };
         })
       );
+  }
+  // id: response,
+
+  getAll(): Observable<Reminder[]> {
+    return this.http
+      .get(`${this.auth.url}/reminders`, {
+        headers: new HttpHeaders({
+          Authorization: this.auth.token,
+        }),
+      })
+      .pipe(
+        map((response: [{ key: string }]) => {
+          return Object.keys(response).map((key) => ({
+            ...response[key],
+          }));
+        })
+      );
+  }
+
+  remove(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.auth.url}/reminders/${id}`, {
+      headers: new HttpHeaders({
+        Authorization: this.auth.token,
+      }),
+    });
   }
 }

@@ -3,11 +3,12 @@ export interface User {
   password: string;
 }
 
-export interface Token {
-  token: string;
-}
-
 export interface Post {
+  note: string;
+  date: Date;
+}
+export interface Reminder {
+  id: string;
   note: string;
   date: Date;
 }
