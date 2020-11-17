@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs/internal/Subscription';
+
 import { Post, Reminder } from 'src/app/shared/interfaces';
+import { AlertService } from 'src/app/shared/services/alert.service';
 import { PostsService } from 'src/app/shared/services/posts.service';
 
 @Component({
@@ -16,7 +18,11 @@ export class EditPageComponent implements OnInit {
   submitted = false;
   uSub: Subscription;
   todayDate: Date = new Date();
-  constructor(private postsService: PostsService) {}
+
+  constructor(
+    private postsService: PostsService,
+    private alert: AlertService
+  ) {}
   ngOnInit() {
     this.form = new FormGroup({
       title: new FormControl(
@@ -39,6 +45,7 @@ export class EditPageComponent implements OnInit {
       })
       .subscribe(() => {
         this.submitted = false;
+        this.alert.success('Напоминание изменено');
       });
   }
 }

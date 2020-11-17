@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription, timer } from 'rxjs';
 import { Reminder } from 'src/app/shared/interfaces';
+import { AlertService } from 'src/app/shared/services/alert.service';
 import { PostsService } from 'src/app/shared/services/posts.service';
 
 @Component({
@@ -15,7 +16,10 @@ export class ReminderPageComponent implements OnInit, OnDestroy {
   searchStr: string = '';
   timer = false;
 
-  constructor(private postsService: PostsService) {}
+  constructor(
+    private postsService: PostsService,
+    private alert: AlertService
+  ) {}
 
   ngOnInit(): void {
     this.pSub = this.postsService.getAll().subscribe((posts) => {
@@ -45,6 +49,7 @@ export class ReminderPageComponent implements OnInit, OnDestroy {
   remove(id: string) {
     this.dSub = this.postsService.remove(id).subscribe(() => {
       this.posts = this.posts.filter((post) => post.id !== id);
+      this.alert.warning('напоминание удалено');
     });
   }
   getId(id: string) {

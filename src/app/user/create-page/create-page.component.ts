@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { Post } from 'src/app/shared/interfaces';
+import { AlertService } from 'src/app/shared/services/alert.service';
 import { PostsService } from './../../shared/services/posts.service';
 
 @Component({
@@ -17,7 +18,9 @@ export class CreatePageComponent implements OnInit {
 
   constructor(
     private postsService: PostsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private alert: AlertService,
+    private router: Router
   ) {
     console.log(this.todayDate);
   }
@@ -49,7 +52,12 @@ export class CreatePageComponent implements OnInit {
     };
     this.postsService.create(post).subscribe(() => {
       this.form.reset();
-      // this.alert.success('Пост был создан');
+      this.alert.success('Напоминание было создано');
+      if (this.message.length) {
+        this.message = '';
+        this.router.navigate(['user', 'create']);
+      }
+      return;
     });
   }
 }

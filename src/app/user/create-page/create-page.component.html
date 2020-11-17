@@ -1,9 +1,5 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
-  <h1>Создание нового напоминания</h1>
-
-  <div class="alert alert-info" *ngIf="message">
-    {{ message }}
-  </div>
+  <h1>Создать новое напоминание</h1>
 
   <div
     class="form-control"
@@ -11,6 +7,9 @@
       invalid: form.get('title').touched && form.get('title').invalid
     }"
   >
+    <div class="alert alert-info" *ngIf="message">
+      {{ message }}
+    </div>
     <label for="title">Что напомнить:</label>
     <input id="title" type="text" formControlName="title" />
     <div
@@ -18,7 +17,7 @@
       class="validation"
     >
       <small *ngIf="form.get('title').errors.required">
-        заметка не может быть пустой
+        текст напоминания не может быть пустым
       </small>
     </div>
   </div>
