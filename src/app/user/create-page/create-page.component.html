@@ -1,6 +1,10 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
   <h1>Создание нового напоминания</h1>
 
+  <div class="alert alert-info" *ngIf="message">
+    {{ message }}
+  </div>
+
   <div
     class="form-control"
     [ngClass]="{

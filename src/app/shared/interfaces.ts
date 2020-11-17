@@ -8,7 +8,7 @@ export interface Post {
   date: Date;
 }
 export interface Reminder {
-  id: string;
+  id?: string;
   note: string;
   date: Date;
 }

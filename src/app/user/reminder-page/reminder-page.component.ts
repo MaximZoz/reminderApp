@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Reminder } from 'src/app/shared/interfaces';
 import { PostsService } from 'src/app/shared/services/posts.service';
+import { EditPageComponent } from '../edit-page/edit-page.component';
 
 @Component({
   selector: 'app-reminder-page',
@@ -36,5 +37,11 @@ export class ReminderPageComponent implements OnInit, OnDestroy {
     this.dSub = this.postsService.remove(id).subscribe(() => {
       this.posts = this.posts.filter((post) => post.id !== id);
     });
+  }
+  getId(id: string) {
+    this.postsService.idUpdate = id;
+  }
+  getNote(none: string) {
+    this.postsService.noteUpdate = none;
   }
 }

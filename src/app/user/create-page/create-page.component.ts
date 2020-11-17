@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Params } from '@angular/router';
+
 import { Post } from 'src/app/shared/interfaces';
 import { PostsService } from './../../shared/services/posts.service';
 
@@ -11,12 +13,23 @@ import { PostsService } from './../../shared/services/posts.service';
 export class CreatePageComponent implements OnInit {
   form: FormGroup;
   todayDate: Date = new Date();
+  message: string;
 
-  constructor(private postsService: PostsService) {
+  constructor(
+    private postsService: PostsService,
+    private route: ActivatedRoute
+  ) {
     console.log(this.todayDate);
   }
 
   ngOnInit() {
+    this.route.queryParams.subscribe((params: Params) => {
+      if (params['createFailed']) {
+        this.message =
+          'Максимальное количество напоминаний: 10, максимальное количество символов: 50, пожалуйста удалите что-нибудь ';
+      }
+    });
+
     this.form = new FormGroup({
       title: new FormControl(null, Validators.required),
       date: new FormControl(null, Validators.required),

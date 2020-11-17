@@ -37,6 +37,15 @@ export class AuthInterseptor implements HttpInterceptor {
             },
           });
         }
+
+        if (error.status === 500) {
+          this.router.navigate(['/user', 'create'], {
+            queryParams: {
+              createFailed: true,
+            },
+          });
+        }
+
         return throwError(error);
       })
     );

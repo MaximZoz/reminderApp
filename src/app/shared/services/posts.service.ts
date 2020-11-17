@@ -7,6 +7,9 @@ import { Post, Reminder } from '../interfaces';
 
 @Injectable({ providedIn: 'root' })
 export class PostsService {
+  idUpdate: string;
+  noteUpdate: string;
+
   constructor(private http: HttpClient, private auth: AuthService) {}
 
   create(post: Post): Observable<Post> {
@@ -25,7 +28,6 @@ export class PostsService {
         })
       );
   }
-  // id: response,
 
   getAll(): Observable<Reminder[]> {
     return this.http
@@ -45,6 +47,14 @@ export class PostsService {
 
   remove(id: string): Observable<void> {
     return this.http.delete<void>(`${this.auth.url}/reminders/${id}`, {
+      headers: new HttpHeaders({
+        Authorization: this.auth.token,
+      }),
+    });
+  }
+
+  update(post: Reminder) {
+    return this.http.put(`${this.auth.url}/reminders/${this.idUpdate}`, post, {
       headers: new HttpHeaders({
         Authorization: this.auth.token,
       }),

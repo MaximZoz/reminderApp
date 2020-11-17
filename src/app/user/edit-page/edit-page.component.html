@@ -1,1 +1,56 @@
-<p>edit-page works!</p>
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <h1>Изменение напоминания</h1>
+
+  <div
+    class="form-control"
+    [ngClass]="{
+      invalid: form.get('title').touched && form.get('title').invalid
+    }"
+  >
+    <label for="title">Что напомнить:</label>
+    <input id="title" type="text" formControlName="title" />
+    <div
+      *ngIf="form.get('title').touched && form.get('title').invalid"
+      class="validation"
+    >
+      <small *ngIf="form.get('title').errors.required">
+        заметка не может быть пустой
+      </small>
+    </div>
+  </div>
+
+  <div
+    class="form-control"
+    [ngClass]="{
+      invalid: form.get('date').touched && form.get('date').invalid
+    }"
+  >
+    <label for="date">Когда напомнить:</label>
+
+    <input
+      id="date"
+      type="datetime-local"
+      formControlName="date"
+      min="{{ todayDate | date: 'yyyy-MM-ddTHH:mm' }}"
+      value="{{ todayDate | date: 'yyyy-MM-ddTHH:mm' }}"
+      class="form-control"
+    />
+
+    <div
+      *ngIf="form.get('date').touched && form.get('date').invalid"
+      class="validation"
+    >
+      <small *ngIf="form.get('date').errors.required">
+        Введите дату и время</small
+      >
+    </div>
+  </div>
+
+  <button
+    type="submit"
+    class="btn btn-block btn-dark"
+    [disabled]="form.invalid"
+  >
+    изменить напоминание
+  </button>
+</form>
