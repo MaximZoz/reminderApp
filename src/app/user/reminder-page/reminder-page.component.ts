@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, timer } from 'rxjs';
 import { Reminder } from 'src/app/shared/interfaces';
 import { PostsService } from 'src/app/shared/services/posts.service';
-import { EditPageComponent } from '../edit-page/edit-page.component';
 
 @Component({
   selector: 'app-reminder-page',
@@ -14,14 +13,24 @@ export class ReminderPageComponent implements OnInit, OnDestroy {
   pSub: Subscription;
   dSub: Subscription;
   searchStr: string = '';
+  timer = false;
+
   constructor(private postsService: PostsService) {}
 
   ngOnInit(): void {
     this.pSub = this.postsService.getAll().subscribe((posts) => {
       this.posts = posts;
-
-      console.log('ReminderPageComponent -> constructor -> posts', this.posts);
+      this.timerPostNone(this.timer);
     });
+    setInterval(() => {
+      this.pSub = this.postsService.getAll().subscribe((posts) => {
+        this.posts = posts;
+        console.log(
+          'ReminderPageComponent -> constructor -> posts',
+          this.posts
+        );
+      });
+    }, 30000);
   }
 
   ngOnDestroy() {
@@ -43,5 +52,15 @@ export class ReminderPageComponent implements OnInit, OnDestroy {
   }
   getNote(none: string) {
     this.postsService.noteUpdate = none;
+  }
+  getData() {
+    setInterval(() => {
+      this.postsService.getAll();
+    }, 10000);
+  }
+  timerPostNone(timer: boolean) {
+    setTimeout(() => {
+      this.timer = true;
+    }, 5000);
   }
 }

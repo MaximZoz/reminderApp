@@ -11,4 +11,5 @@ export interface Reminder {
   id?: string;
   note: string;
   date: Date;
+  dateNow?: Date;
 }

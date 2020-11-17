@@ -18,8 +18,9 @@
     <tbody>
       <tr *ngFor="let post of posts | searchPosts: searchStr">
         <td>{{ post.note }}</td>
-        <td>{{ post.date | date: "EEEE, MMMM d, y, h:mm":"ru" }}</td>
-        <td></td>
+        <td>{{ post.date | date: "EEEE,d MMMM, y, HH:mm":null:"ru" }}</td>
+        <td *ngIf="post.date < post.dateNow">просрочено</td>
+        <td *ngIf="post.date > post.dateNow">активно</td>
         <td>
           <button
             class="btn btn-link open"
@@ -37,5 +38,11 @@
 </div>
 
 <ng-template #loading>
-  <p class="text-center">Идет загрузка...</p>
+  <div *ngIf="!timer; else postNone">
+    <p class="text-center">загрузка...</p>
+  </div>
+</ng-template>
+
+<ng-template #postNone>
+  <p class="text-center">постов нет, создайте их</p>
 </ng-template>

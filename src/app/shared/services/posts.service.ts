@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+
 import { AuthService } from './auth.service';
 import { Post, Reminder } from '../interfaces';
-
 @Injectable({ providedIn: 'root' })
 export class PostsService {
   idUpdate: string;
@@ -39,7 +39,12 @@ export class PostsService {
       .pipe(
         map((response: [{ key: string }]) => {
           return Object.keys(response).map((key) => ({
+            dateNow: new Date(),
             ...response[key],
+
+            date: new Date(response[key].date).setMilliseconds(
+              -2 * 60 * 60 * 1000
+            ),
           }));
         })
       );
