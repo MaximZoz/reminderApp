@@ -13,6 +13,7 @@ export class AuthService {
     return this.http.post(`${this.url}/auth`, user).pipe(
       tap((response) => {
         localStorage.setItem('token', 'Bearer ' + response.token);
+        localStorage.setItem('note', JSON.stringify([]));
       })
     );
   }

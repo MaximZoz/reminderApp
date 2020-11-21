@@ -18,9 +18,15 @@
     <tbody>
       <tr *ngFor="let post of posts | searchPosts: searchStr">
         <td>{{ post.note }}</td>
-        <td>{{ post.date | date: "EEEE,d MMMM, y, HH:mm":null:"ru" }}</td>
-        <td *ngIf="post.date < post.dateNow">просрочено</td>
-        <td *ngIf="post.date > post.dateNow">активно</td>
+        <td>
+          {{ post.date | date: "EEEE,d MMMM, y, HH:mm":null:"ru" }}
+        </td>
+        <td *ngIf="post.date <= post.dateNow" class="red">
+          просрочено
+          <!-- {{ showReminder(post.note) }} -->
+        </td>
+        <td *ngIf="post.date > post.dateNow" class="green">активно</td>
+
         <td>
           <button
             class="btn btn-link open"
@@ -30,7 +36,7 @@
           >
             Изменить
           </button>
-          <a (click)="remove(post.id)">Удалить </a>
+          <a (click)="remove(post.id)" (click)="delete(post.note)">Удалить </a>
         </td>
       </tr>
     </tbody>

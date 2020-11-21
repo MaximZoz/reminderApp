@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 
 import { Post, Reminder } from 'src/app/shared/interfaces';
@@ -21,7 +22,8 @@ export class EditPageComponent implements OnInit {
 
   constructor(
     private postsService: PostsService,
-    private alert: AlertService
+    private alert: AlertService,
+    private router: Router
   ) {}
   ngOnInit() {
     this.form = new FormGroup({
@@ -37,7 +39,11 @@ export class EditPageComponent implements OnInit {
       return;
     }
     this.submitted = true;
-    this.uSub = this.postsService
+    const post: Post = {
+      note: this.form.value.title,
+      date: this.form.value.date,
+    };
+    (this.uSub = this.postsService
       .update({
         ...this.post,
         note: this.form.value.title,
@@ -46,6 +52,11 @@ export class EditPageComponent implements OnInit {
       .subscribe(() => {
         this.submitted = false;
         this.alert.success('Напоминание изменено');
-      });
+        this.postsService.editValueNoteLS(
+          this.postsService.noteUpdate,
+          post.note
+        );
+      })),
+      this.router.navigate(['user', 'reminder']);
   }
 }

@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { User } from 'src/app/shared/interfaces';
+import { AlertService } from 'src/app/shared/services/alert.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
@@ -17,7 +18,8 @@ export class LoginPageComponent implements OnInit {
   constructor(
     public auth: AuthService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private alert: AlertService
   ) {}
 
   ngOnInit(): void {
@@ -50,6 +52,7 @@ export class LoginPageComponent implements OnInit {
         this.form.reset();
         this.router.navigate(['/user', 'reminder']);
         this.submitted = false;
+        this.alert.success('Поздравляю, Вы в системе!');
       },
       () => {
         this.submitted = false;

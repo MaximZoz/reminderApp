@@ -29,7 +29,7 @@ export class CreatePageComponent implements OnInit {
     this.route.queryParams.subscribe((params: Params) => {
       if (params['createFailed']) {
         this.message =
-          'Максимальное количество напоминаний: 10, максимальное количество символов: 50, пожалуйста удалите что-нибудь ';
+          'Максимальное количество напоминаний: 10, максимальное количество символов: 50, пожалуйста удалите что-нибудь';
       }
     });
 
@@ -43,19 +43,19 @@ export class CreatePageComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-    console.log(this.form.value.date);
-    // return;
 
     const post: Post = {
       note: this.form.value.title,
       date: this.form.value.date,
     };
+
+    this.postsService.setValueNoteLS(post.note);
     this.postsService.create(post).subscribe(() => {
       this.form.reset();
       this.alert.success('Напоминание было создано');
-      if (this.message.length) {
-        this.message = '';
+      if (this.message) {
         this.router.navigate(['user', 'create']);
+        this.message = '';
       }
       return;
     });

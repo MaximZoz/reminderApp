@@ -5,15 +5,32 @@ import { map } from 'rxjs/operators';
 
 import { AuthService } from './auth.service';
 import { Post, Reminder } from '../interfaces';
+import { Router } from '@angular/router';
 @Injectable({ providedIn: 'root' })
 export class PostsService {
   idUpdate: string;
   noteUpdate: string;
+  valueNoteLS = [];
 
   constructor(private http: HttpClient, private auth: AuthService) {}
 
+  setValueNoteLS(valueNote: string) {
+    this.valueNoteLS = JSON.parse(localStorage.getItem('note'));
+    this.valueNoteLS.push(valueNote);
+    localStorage.setItem('note', JSON.stringify(this.valueNoteLS));
+  }
+
+  removeValueNoteLS(noteUpdate: string) {
+    this.valueNoteLS = JSON.parse(localStorage.getItem('note'));
+    this.valueNoteLS = this.valueNoteLS.filter((note) => noteUpdate !== note);
+    localStorage.setItem('note', JSON.stringify(this.valueNoteLS));
+  }
+  editValueNoteLS(noteUpdate: string, noteEdit: string) {
+    this.setValueNoteLS(noteEdit);
+    this.removeValueNoteLS(noteUpdate);
+  }
+
   create(post: Post): Observable<Post> {
-    console.log(post);
     return this.http
       .post(`${this.auth.url}/reminders`, post, {
         headers: new HttpHeaders({
@@ -41,7 +58,6 @@ export class PostsService {
           return Object.keys(response).map((key) => ({
             dateNow: new Date(),
             ...response[key],
-
             date: new Date(response[key].date).setMilliseconds(
               -2 * 60 * 60 * 1000
             ),

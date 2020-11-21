@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription, timer } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { Reminder } from 'src/app/shared/interfaces';
 import { AlertService } from 'src/app/shared/services/alert.service';
 import { PostsService } from 'src/app/shared/services/posts.service';
@@ -15,6 +15,7 @@ export class ReminderPageComponent implements OnInit, OnDestroy {
   dSub: Subscription;
   searchStr: string = '';
   timer = false;
+  noteLS = JSON.parse(localStorage.getItem('note'));
 
   constructor(
     private postsService: PostsService,
@@ -24,15 +25,11 @@ export class ReminderPageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.pSub = this.postsService.getAll().subscribe((posts) => {
       this.posts = posts;
-      this.timerPostNone(this.timer);
+      this.timerPostNone();
     });
     setInterval(() => {
       this.pSub = this.postsService.getAll().subscribe((posts) => {
         this.posts = posts;
-        console.log(
-          'ReminderPageComponent -> constructor -> posts',
-          this.posts
-        );
       });
     }, 30000);
   }
@@ -52,20 +49,39 @@ export class ReminderPageComponent implements OnInit, OnDestroy {
       this.alert.warning('напоминание удалено');
     });
   }
+  delete(note: string) {
+    this.postsService.removeValueNoteLS(note);
+  }
+
   getId(id: string) {
     this.postsService.idUpdate = id;
   }
-  getNote(none: string) {
-    this.postsService.noteUpdate = none;
+  getNote(note: string) {
+    this.postsService.noteUpdate = note;
   }
   getData() {
     setInterval(() => {
       this.postsService.getAll();
     }, 10000);
   }
-  timerPostNone(timer: boolean) {
+  timerPostNone() {
     setTimeout(() => {
       this.timer = true;
     }, 5000);
   }
+
+  // showReminder(note: string) {
+  //   if (localStorage.setItem(note, note) !== null) {
+  //     this.alert.danger(note);
+  //     localStorage.removeItem(note);
+  //   }
+  // }
+
+  // showReminder(note: string) {
+  //   this.noteLS
+  //   if (this.noteLS.indexOf(note) != -1) {
+  //     this.alert.danger(note);
+  //     this.postsService.removeValueNoteLS(note);
+  //   }
+  // }
 }
