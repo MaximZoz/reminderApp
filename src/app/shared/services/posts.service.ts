@@ -5,7 +5,6 @@ import { map } from 'rxjs/operators';
 
 import { AuthService } from './auth.service';
 import { Post, Reminder } from '../interfaces';
-import { Router } from '@angular/router';
 @Injectable({ providedIn: 'root' })
 export class PostsService {
   idUpdate: string;
@@ -26,8 +25,8 @@ export class PostsService {
     localStorage.setItem('note', JSON.stringify(this.valueNoteLS));
   }
   editValueNoteLS(noteUpdate: string, noteEdit: string) {
-    this.setValueNoteLS(noteEdit);
     this.removeValueNoteLS(noteUpdate);
+    this.setValueNoteLS(noteEdit);
   }
 
   create(post: Post): Observable<Post> {

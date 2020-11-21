@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
+import { MyValidators } from 'src/app/shared/myValidators';
 import { Post } from 'src/app/shared/interfaces';
 import { AlertService } from 'src/app/shared/services/alert.service';
 import { PostsService } from './../../shared/services/posts.service';
@@ -21,9 +22,7 @@ export class CreatePageComponent implements OnInit {
     private route: ActivatedRoute,
     private alert: AlertService,
     private router: Router
-  ) {
-    console.log(this.todayDate);
-  }
+  ) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe((params: Params) => {
@@ -34,8 +33,11 @@ export class CreatePageComponent implements OnInit {
     });
 
     this.form = new FormGroup({
-      title: new FormControl(null, Validators.required),
-      date: new FormControl(null, Validators.required),
+      title: new FormControl(null, MyValidators.restrictedNote),
+      date: new FormControl(
+        null
+        //  MyValidators.restrictedDate
+      ),
     });
   }
 
@@ -59,5 +61,6 @@ export class CreatePageComponent implements OnInit {
       }
       return;
     });
+    console.log(new Date(), post.date);
   }
 }

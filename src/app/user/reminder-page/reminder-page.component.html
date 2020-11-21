@@ -23,7 +23,7 @@
         </td>
         <td *ngIf="post.date <= post.dateNow" class="red">
           просрочено
-          <!-- {{ showReminder(post.note) }} -->
+          {{ showReminder(post.note) }}
         </td>
         <td *ngIf="post.date > post.dateNow" class="green">активно</td>
 

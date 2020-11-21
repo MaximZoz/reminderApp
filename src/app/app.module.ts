@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { MainLayoutComponent } from './shared/components/main-layout/main-layout.component';
 import { SharedModule } from './user/shared/shared.module';
 import { AuthInterseptor } from './shared/auth.interseptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './manerial.module';
 
 registerLocaleData(ruLocale, 'ru');
 
@@ -19,7 +21,13 @@ const INTERCEPTOR_PROVIDER: Provider = {
 };
 @NgModule({
   declarations: [AppComponent, MainLayoutComponent],
-  imports: [BrowserModule, AppRoutingModule, SharedModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    SharedModule,
+    BrowserAnimationsModule,
+    MaterialModule,
+  ],
   providers: [INTERCEPTOR_PROVIDER],
   bootstrap: [AppComponent],
 })

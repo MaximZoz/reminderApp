@@ -11,7 +11,7 @@
       {{ message }}
     </div>
     <label for="title">Что напомнить:</label>
-    <input id="title" type="text" formControlName="title" />
+    <input id="title" type="text" formControlName="title" required />
     <div
       *ngIf="form.get('title').touched && form.get('title').invalid"
       class="validation"
@@ -19,9 +19,11 @@
       <small *ngIf="form.get('title').errors.required">
         текст напоминания не может быть пустым
       </small>
+      <small *ngIf="form.get('title').errors.restrictedNote">
+        напоминание '{{ form.get("title").value }}' уже есть, попробуйте другое
+      </small>
     </div>
   </div>
-
   <div
     class="form-control"
     [ngClass]="{
@@ -34,9 +36,10 @@
       id="date"
       type="datetime-local"
       formControlName="date"
-      min="{{ todayDate | date: 'yyyy-MM-ddTHH:mm' }}"
-      value="{{ todayDate | date: 'yyyy-MM-ddTHH:mm' }}"
+      min="{{ todayDate | date: 'yyyy-MM-ddThh:m' }}"
+      value="{{ todayDate | date: 'yyyy-MM-ddThh:m' }}"
       class="form-control"
+      required
     />
 
     <div
@@ -46,6 +49,9 @@
       <small *ngIf="form.get('date').errors.required">
         Введите дату и время</small
       >
+      <small *ngIf="form.get('date').errors.restrictedDate">
+        Время должно быть больше текущего
+      </small>
     </div>
   </div>
 
