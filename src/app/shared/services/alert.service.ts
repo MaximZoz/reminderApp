@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
-export type AlertType = 'success' | 'warning' | 'note' | 'danger';
+export type AlertType = 'success' | 'warning' | 'danger';
 
 export interface Alert {
   type: AlertType;
@@ -29,12 +29,6 @@ export class AlertService {
   danger(text: string) {
     this.alert$.next({
       type: 'danger',
-      text,
-    });
-  }
-  note(text: string) {
-    this.alert$.next({
-      type: 'note',
       text,
     });
   }

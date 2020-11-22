@@ -2,17 +2,18 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+
+import { MaterialModule } from '../manerial.module';
 import { AlertService } from '../shared/services/alert.service';
 import { AuthGuard } from '../shared/services/auth.guard';
 import { AuthService } from '../shared/services/auth.service';
 import { SearchPipe } from '../shared/services/search.pipe';
-
 import { CreatePageComponent } from './create-page/create-page.component';
 import { EditPageComponent } from './edit-page/edit-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { ReminderPageComponent } from './reminder-page/reminder-page.component';
-import { AlertComponent } from './shared/component/alert/alert.component';
 import { UserLayoutComponent } from './shared/component/user-layout/user-layout.component';
+import { AlertComponent } from './shared/component/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { UserLayoutComponent } from './shared/component/user-layout/user-layout.
   ],
   imports: [
     CommonModule,
+    MaterialModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild([

@@ -28,11 +28,11 @@ export class ReminderPageComponent implements OnInit, OnDestroy {
       this.timerPostNone();
     });
 
-    // setInterval(() => {
-    this.pSub = this.postsService.getAll().subscribe((posts) => {
-      this.posts = posts;
-    });
-    // }, 40000);
+    setInterval(() => {
+      this.pSub = this.postsService.getAll().subscribe((posts) => {
+        this.posts = posts;
+      });
+    }, 30000);
   }
 
   ngOnDestroy() {
@@ -71,17 +71,10 @@ export class ReminderPageComponent implements OnInit, OnDestroy {
     }, 5000);
   }
 
-  // showReminder(note: string) {
-  //   if (localStorage.setItem(note, note) !== null) {
-  //     this.alert.danger(note);
-  //     localStorage.removeItem(note);
-  //   }
-  // }
-
   showReminder(note: string) {
     this.noteLS;
-    if (this.noteLS.indexOf(note) != -1) {
-      this.alert.danger(note);
+    if (this.noteLS.includes(note)) {
+      this.alert.success(note);
       this.postsService.removeValueNoteLS(note);
     }
   }

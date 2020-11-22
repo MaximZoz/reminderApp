@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 
 import { Post, Reminder } from 'src/app/shared/interfaces';
+import { MyValidators } from 'src/app/shared/myValidators';
 import { AlertService } from 'src/app/shared/services/alert.service';
 import { PostsService } from 'src/app/shared/services/posts.service';
 
@@ -27,11 +28,8 @@ export class EditPageComponent implements OnInit {
   ) {}
   ngOnInit() {
     this.form = new FormGroup({
-      title: new FormControl(
-        this.postsService.noteUpdate.toString(),
-        Validators.required
-      ),
-      date: new FormControl(null, Validators.required),
+      title: new FormControl(this.postsService.noteUpdate.toString()),
+      date: new FormControl(null, MyValidators.restrictedDate),
     });
   }
   submit() {
@@ -49,6 +47,7 @@ export class EditPageComponent implements OnInit {
         note: this.form.value.title,
         date: this.form.value.date,
       })
+
       .subscribe(() => {
         this.submitted = false;
         this.alert.success('Напоминание изменено');

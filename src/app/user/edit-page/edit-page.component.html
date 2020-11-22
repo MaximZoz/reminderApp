@@ -16,7 +16,7 @@
       class="validation"
     >
       <small *ngIf="form.get('title').errors.required">
-        заметка не может быть пустой
+        текст напоминания не может быть пустым
       </small>
     </div>
   </div>
@@ -45,6 +45,9 @@
       <small *ngIf="form.get('date').errors.required">
         Введите дату и время</small
       >
+      <small *ngIf="form.get('date').errors.restrictedDate">
+        Время должно быть больше текущего
+      </small>
     </div>
   </div>
 

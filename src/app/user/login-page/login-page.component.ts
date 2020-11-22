@@ -52,7 +52,7 @@ export class LoginPageComponent implements OnInit {
         this.form.reset();
         this.router.navigate(['/user', 'reminder']);
         this.submitted = false;
-        this.alert.success('Поздравляю, Вы в системе!');
+        this.alert.success('Вы вошли!');
       },
       () => {
         this.submitted = false;

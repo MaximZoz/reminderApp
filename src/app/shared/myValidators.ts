@@ -7,10 +7,10 @@ export class MyValidators {
     return null;
   }
 
-  //   static restrictedDate(control: FormControl): { [key: string]: boolean } {
-  //     if (new Date().toString() > control.value) {
-  //       return { restrictedDate: true };
-  //     }
-  //     return null;
-  //   }
+  static restrictedDate(control: FormControl): { [key: string]: boolean } {
+    if (new Date() > new Date(control.value)) {
+      return { restrictedDate: true };
+    }
+    return null;
+  }
 }

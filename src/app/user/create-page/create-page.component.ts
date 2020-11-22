@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { MyValidators } from 'src/app/shared/myValidators';
@@ -34,10 +34,7 @@ export class CreatePageComponent implements OnInit {
 
     this.form = new FormGroup({
       title: new FormControl(null, MyValidators.restrictedNote),
-      date: new FormControl(
-        null
-        //  MyValidators.restrictedDate
-      ),
+      date: new FormControl(null, MyValidators.restrictedDate),
     });
   }
 
@@ -61,6 +58,5 @@ export class CreatePageComponent implements OnInit {
       }
       return;
     });
-    console.log(new Date(), post.date);
   }
 }

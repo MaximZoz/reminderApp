@@ -46,6 +46,7 @@
 <ng-template #loading>
   <div *ngIf="!timer; else postNone">
     <p class="text-center">загрузка...</p>
+    <mat-progress-bar mode="buffer"></mat-progress-bar>
   </div>
 </ng-template>
 
